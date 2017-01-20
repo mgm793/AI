@@ -72,7 +72,7 @@ def tinyMazeSearch(problem):
     w = Directions.WEST
     return  [s, s, w, s, w, w, s, w]
 
-def depthFirstSearch(problem):
+def depthFirstSearch(problem): #it works (3/3)
     """
     Search the deepest nodes in the search tree first.
 
@@ -88,12 +88,12 @@ def depthFirstSearch(problem):
     """
     "*** YOUR CODE HERE ***"
     stack = util.Stack()
-    start = (problem.getStartState(), 0) 
+    start = (problem.getStartState(), None) 
     stack.push(start)
     closeList = set()
     output = []
 
-    while not stack.isEmpty()  :
+    while not stack.isEmpty() :
         actualNode = stack.pop()
         if actualNode[0] in closeList :
             continue
@@ -104,10 +104,7 @@ def depthFirstSearch(problem):
                     actualNode = actualNode[3]
                 return output[::-1]
             else :
-                if actualNode == problem.getStartState() :
-                    childs = problem.getSuccessors(actualNode)
-                else :
-                    childs = problem.getSuccessors(actualNode[0])
+                childs = problem.getSuccessors(actualNode[0])
                 for child in childs :
                     child = child + (actualNode, )
                     stack.push(child)
@@ -115,7 +112,7 @@ def depthFirstSearch(problem):
 
     util.raiseNotDefined()
 
-def breadthFirstSearch(problem):
+def breadthFirstSearch(problem): #it works (3/3)
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
     queue = util.Queue()
@@ -124,7 +121,7 @@ def breadthFirstSearch(problem):
     closeList = set()
     output = []
 
-    while not queue.isEmpty()  :
+    while not queue.isEmpty() :
         actualNode = queue.pop()
         if actualNode[0] in closeList :
             continue
@@ -135,20 +132,18 @@ def breadthFirstSearch(problem):
                     actualNode = actualNode[3]
                 return output[::-1]
             else :
-                if actualNode == problem.getStartState() :
-                    childs = problem.getSuccessors(actualNode)
-                else :
-                    childs = problem.getSuccessors(actualNode[0])
+                childs = problem.getSuccessors(actualNode[0])
                 for child in childs :
                     child = child + (actualNode, )
                     queue.push(child)
         closeList.add(actualNode[0])
-        
+
     util.raiseNotDefined()
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
+
     util.raiseNotDefined()
 
 def nullHeuristic(state, problem=None):
@@ -161,6 +156,14 @@ def nullHeuristic(state, problem=None):
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
+    queue = util.PriorityQueue()
+    start = problem.getStartState()
+    queue.push(start, heuristic(start, problem) )
+    closeList = set()
+    output = []
+
+
+
     util.raiseNotDefined()
 
 
