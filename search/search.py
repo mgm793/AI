@@ -99,7 +99,7 @@ def depthFirstSearch(problem): #it works (3/3)
             continue
         else :
             if problem.isGoalState(actualNode[0]) :
-                while actualNode[0] != problem.getStartState() :
+                while actualNode != start :
                     output.append(actualNode[1])
                     actualNode = actualNode[3]
                 return output[::-1]
@@ -127,7 +127,7 @@ def breadthFirstSearch(problem): #it works (3/3)
             continue
         else :
             if problem.isGoalState(actualNode[0]) :
-                while actualNode[0] != problem.getStartState() :
+                while actualNode != start :
                     output.append(actualNode[1])
                     actualNode = actualNode[3]
                 return output[::-1]
