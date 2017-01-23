@@ -88,7 +88,7 @@ def depthFirstSearch(problem): #it works (3/3)
     """
     "*** YOUR CODE HERE ***"
     stack = util.Stack()
-    start = (problem.getStartState(), None) 
+    start = (problem.getStartState(), None, None) 
     stack.push(start)
     closeList = set()
     output = []
@@ -116,7 +116,7 @@ def breadthFirstSearch(problem): #it works (3/3)
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
     queue = util.Queue()
-    start = (problem.getStartState(), 0)
+    start = (problem.getStartState(), None, None)
     queue.push(start)
     closeList = set()
     output = []
@@ -143,6 +143,30 @@ def breadthFirstSearch(problem): #it works (3/3)
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
+    queue = util.PriorityQueue()
+    start = (problem.getStartState(), None , 0 , None, 0)
+    queue.push(start, 0 )
+    closeList = set()
+    output = []
+    
+    while not queue.isEmpty() :
+        actualNode = queue.pop()
+        if actualNode[0] in closeList :
+            continue
+        else :
+            if problem.isGoalState(actualNode[0]) :
+                while actualNode != start :
+                    output.append(actualNode[1])
+                    actualNode = actualNode[3]
+                return output[::-1]
+            else :
+                childs = problem.getSuccessors(actualNode[0])
+                for child in childs :
+                    weight = child[2] + actualNode[4]
+                    child = child + (actualNode, weight, )
+                    f =  weight
+                    queue.push(child , f)
+        closeList.add(actualNode[0])
 
     util.raiseNotDefined()
 
@@ -157,8 +181,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
     queue = util.PriorityQueue()
-    start = (problem.getStartState(), None, 0)
-    #print start
+    start = (problem.getStartState(), None , 0 , None, 0)
     queue.push(start, heuristic(start[0], problem) )
     closeList = set()
     output = []
@@ -176,12 +199,11 @@ def aStarSearch(problem, heuristic=nullHeuristic):
             else :
                 childs = problem.getSuccessors(actualNode[0])
                 for child in childs :
-                    weight = child[2] + actualNode[2]
+                    weight = child[2] + actualNode[4]
                     child = child + (actualNode, weight, )
                     f = heuristic(child[0], problem) + weight
                     queue.push(child , f)
         closeList.add(actualNode[0])
-
     util.raiseNotDefined()
 
 
