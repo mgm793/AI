@@ -186,7 +186,7 @@ def aStarSearch(problem, heuristic=nullHeuristic): #it works (3/3)
     queue = util.PriorityQueue()
     start = (problem.getStartState(), None , 0 , None, 0)
     queue.push(start, heuristic(start[0], problem) )
-    closeList = set()
+    closeList = []
     output = []
 
     while not queue.isEmpty() :
@@ -206,7 +206,7 @@ def aStarSearch(problem, heuristic=nullHeuristic): #it works (3/3)
                     child = child + (actualNode, weight, )
                     f = heuristic(child[0], problem) + weight
                     queue.push(child , f)
-        closeList.add(actualNode[0])
+        closeList.append(actualNode[0])
     util.raiseNotDefined()
 
 

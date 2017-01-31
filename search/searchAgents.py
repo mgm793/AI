@@ -288,8 +288,9 @@ class CornersProblem(search.SearchProblem):
         # Please add any code here which you would like to use
         # in initializing the problem
         "*** YOUR CODE HERE ***"
-        self.visited = set()
-
+        # self.visited = set()
+        self.top = top
+        self.right = right
 
     def getStartState(self):
         """
@@ -297,7 +298,8 @@ class CornersProblem(search.SearchProblem):
         space)
         """
         "*** YOUR CODE HERE ***"
-        return (self.startingPosition, set(self.visited))
+        return (self.startingPosition, set()) #change
+        # return (self.startingPosition, set(self.visited))
         util.raiseNotDefined()
 
     def isGoalState(self, state):
@@ -305,7 +307,8 @@ class CornersProblem(search.SearchProblem):
         Returns whether this search state is a goal state of the problem.
         """
         "*** YOUR CODE HERE ***"
-        if len(self.visited) == len(self.corners):
+        if len(state[1]) == len(self.corners): #change
+        # if len(self.visited) == len(self.corners):
                 return True
         return False
         util.raiseNotDefined()
@@ -335,9 +338,12 @@ class CornersProblem(search.SearchProblem):
             nextx, nexty = int(x + dx), int(y + dy)
             hitsWall = self.walls[nextx][nexty]
             if not hitsWall :
+                visited = set(state[1]) #canvi
                 if (nextx, nexty) in self.corners:
-                    self.visited.add((nextx, nexty))
-                nextState = ((nextx, nexty), set(self.visited))
+                    visited.add((nextx, nexty)) #canvi
+                    # self.visited.add((nextx, nexty))
+                nextState = ((nextx, nexty), set(visited)) #canvi
+                #nextState = ((nextx, nexty), set(self.visited))
                 successors.append( ( nextState , action , 1 ) )
         self._expanded += 1 # DO NOT CHANGE
         return successors
@@ -378,16 +384,36 @@ def cornersHeuristic(state, problem):
     shortest path from the state to a goal of the problem; i.e.  it should be
     admissible (as well as consistent).
     """
-    corners = list(problem.corners) # These are the corner coordinates
+    corners = problem.corners # These are the corner coordinates
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
     actual = state[0]
     "*** YOUR CODE HERE ***"
     distance = 99999
-    for corner in corners:
-        manhatan = util.manhattanDistance(actual,corner)
-        if manhatan < distance:
-            distance = manhatan
+    if problem.isGoalState(state):
+        return 0
+    else:
+        for corner in corners:
+            manhatan = util.manhattanDistance(actual,corner)
+            if manhatan < distance:
+                distance = manhatan
+            if len(state[1]) == 1:
+                if problem.top < problem.right:
+                    distance += ((problem.top - 1) * 2) + (problem.right - 1)
+                else :
+                    distance += ((problem.right - 1) * 2) + (problem.top - 1)
+            elif len(state[1]) == 2:
+                if problem.top < problem.right:
+                    distance += (problem.top - 1) + (problem.right - 1)
+                else :
+                    distance += (problem.right - 1) + (problem.top - 1)
+            elif len(state[1]) == 3:
+                if problem.top < problem.right:
+                    distance += (problem.top - 1)
+                else :
+                    distance += (problem.right - 1)
     return distance
+
+
 
 
 class AStarCornersAgent(SearchAgent):
