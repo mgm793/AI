@@ -342,7 +342,7 @@ class CornersProblem(search.SearchProblem):
                 if (nextx, nexty) in self.corners:
                     visited.add((nextx, nexty)) #canvi
                     # self.visited.add((nextx, nexty))
-                nextState = ((nextx, nexty), set(visited)) #canvi
+                nextState = ((nextx, nexty), visited) #canvi
                 #nextState = ((nextx, nexty), set(self.visited))
                 successors.append( ( nextState , action , 1 ) )
         self._expanded += 1 # DO NOT CHANGE
@@ -384,35 +384,34 @@ def cornersHeuristic(state, problem):
     shortest path from the state to a goal of the problem; i.e.  it should be
     admissible (as well as consistent).
     """
-    corners = problem.corners # These are the corner coordinates
+    corners = list(problem.corners) # These are the corner coordinates
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
     actual = state[0]
-    "*** YOUR CODE HERE ***"
-    distance = 99999
-    if problem.isGoalState(state):
-        return 0
-    else:
-        for corner in corners:
-            manhatan = util.manhattanDistance(actual,corner)
-            if manhatan < distance:
-                distance = manhatan
-            if len(state[1]) == 1:
-                if problem.top < problem.right:
-                    distance += ((problem.top - 1) * 2) + (problem.right - 1)
-                else :
-                    distance += ((problem.right - 1) * 2) + (problem.top - 1)
-            elif len(state[1]) == 2:
-                if problem.top < problem.right:
-                    distance += (problem.top - 1) + (problem.right - 1)
-                else :
-                    distance += (problem.right - 1) + (problem.top - 1)
-            elif len(state[1]) == 3:
-                if problem.top < problem.right:
-                    distance += (problem.top - 1)
-                else :
-                    distance += (problem.right - 1)
-    return distance
+    corners.append(actual)
+    dist = distance = 0
 
+    "*** YOUR CODE HERE ***"
+    #REMOVE CORNERS VISITED
+    for state in state[1]:
+        corners.remove(state)
+
+    lencor = len(corners)
+
+    for i in range(lencor):
+        corners.remove(actual)
+        if corners:
+            distance, actual = calcDist(actual, corners)
+            dist += distance
+    return dist
+
+def calcDist(actual, corners):
+    distance = 999999
+    for corner in corners:
+        manhatan = util.manhattanDistance(actual,corner)
+        if manhatan < distance:
+            distance = manhatan
+            act = corner
+    return distance, act
 
 
 
