@@ -118,7 +118,7 @@ def breadthFirstSearch(problem): #it works (3/3)
     queue = util.Queue()
     start = (problem.getStartState(), None, None)
     queue.push(start)
-    closeList = set()
+    closeList = []
     output = []
 
     while not queue.isEmpty() :
@@ -130,17 +130,20 @@ def breadthFirstSearch(problem): #it works (3/3)
                 while actualNode != start :
                     output.append(actualNode[1])
                     actualNode = actualNode[3]
+                    
+                    #print actualNode ,'\n'
+
                 return output[::-1]
             else :
                 childs = problem.getSuccessors(actualNode[0])
                 for child in childs :
                     child = child + (actualNode, )
                     queue.push(child)
-        closeList.add(actualNode[0])
+        closeList.append(actualNode[0])
 
     util.raiseNotDefined()
 
-def uniformCostSearch(problem):
+def uniformCostSearch(problem): #it works (3/3)
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
     queue = util.PriorityQueue()
@@ -177,7 +180,7 @@ def nullHeuristic(state, problem=None):
     """
     return 0
 
-def aStarSearch(problem, heuristic=nullHeuristic):
+def aStarSearch(problem, heuristic=nullHeuristic): #it works (3/3)
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
     queue = util.PriorityQueue()

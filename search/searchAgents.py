@@ -297,7 +297,7 @@ class CornersProblem(search.SearchProblem):
         space)
         """
         "*** YOUR CODE HERE ***"
-        return self.startingPosition
+        return (self.startingPosition, set())
         util.raiseNotDefined()
 
     def isGoalState(self, state):
@@ -305,11 +305,13 @@ class CornersProblem(search.SearchProblem):
         Returns whether this search state is a goal state of the problem.
         """
         "*** YOUR CODE HERE ***"
-        if state in self.corners and state not in self.visited :
-            self.visited.add(state)
-            return state in self.corners
-        else :
-            return False
+        if state[0] in self.corners:
+            self.visited.add(state[0])
+            for corner in self.corners:
+                if corner not in self.visited:
+                    return False
+            return True
+        return False
         
         util.raiseNotDefined()
 
@@ -323,7 +325,6 @@ class CornersProblem(search.SearchProblem):
             state, 'action' is the action required to get there, and 'stepCost'
             is the incremental cost of expanding to that successor
         """
-        print state
         successors = []
         for action in [Directions.NORTH, Directions.SOUTH, Directions.EAST, Directions.WEST]:
             # Add a successor state to the successor list if the action is legal
@@ -334,13 +335,12 @@ class CornersProblem(search.SearchProblem):
             #   hitsWall = self.walls[nextx][nexty]
 
             "*** YOUR CODE HERE ***"
-            x,y = state
+            x,y = state[0]
             dx, dy = Actions.directionToVector(action)
             nextx, nexty = int(x + dx), int(y + dy)
             hitsWall = self.walls[nextx][nexty]
             if not hitsWall :
-                nextState = (nextx, nexty)
-                #cost = self.getCostOfActions(action)
+                nextState = ((nextx, nexty), set(self.visited))
                 successors.append( ( nextState , action , 1 ) )
         self._expanded += 1 # DO NOT CHANGE
         return successors
@@ -372,11 +372,25 @@ def cornersHeuristic(state, problem):
     shortest path from the state to a goal of the problem; i.e.  it should be
     admissible (as well as consistent).
     """
-    corners = problem.corners # These are the corner coordinates
+    """
+    A heuristic for the CornersProblem that you defined.
+      state:   The current search state
+               (a data structure you chose in your search problem)
+      problem: The CornersProblem instance for this layout.
+    This function should always return a number that is a lower bound on the
+    shortest path from the state to a goal of the problem; i.e.  it should be
+    admissible (as well as consistent).
+    """
+    corners = list(problem.corners) # These are the corner coordinates
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
-
     "*** YOUR CODE HERE ***"
-    return 0 # Default to trivial solution
+    distance = 99999
+    for corner in corners :
+        manhatan = abs(corner[0] - state[0]) + abs(corner[1] - state[1])
+        if  manhatan < distance :
+            distance = manhatan
+    return distance
+
 
 class AStarCornersAgent(SearchAgent):
     "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
