@@ -297,7 +297,7 @@ class CornersProblem(search.SearchProblem):
         space)
         """
         "*** YOUR CODE HERE ***"
-        return (self.startingPosition, set())
+        return (self.startingPosition, set(self.visited))
         util.raiseNotDefined()
 
     def isGoalState(self, state):
@@ -305,14 +305,9 @@ class CornersProblem(search.SearchProblem):
         Returns whether this search state is a goal state of the problem.
         """
         "*** YOUR CODE HERE ***"
-        if state[0] in self.corners:
-            self.visited.add(state[0])
-            for corner in self.corners:
-                if corner not in self.visited:
-                    return False
-            return True
+        if len(self.visited) == len(self.corners):
+                return True
         return False
-        
         util.raiseNotDefined()
 
     def getSuccessors(self, state):
@@ -340,6 +335,8 @@ class CornersProblem(search.SearchProblem):
             nextx, nexty = int(x + dx), int(y + dy)
             hitsWall = self.walls[nextx][nexty]
             if not hitsWall :
+                if (nextx, nexty) in self.corners:
+                    self.visited.add((nextx, nexty))
                 nextState = ((nextx, nexty), set(self.visited))
                 successors.append( ( nextState , action , 1 ) )
         self._expanded += 1 # DO NOT CHANGE
@@ -383,11 +380,12 @@ def cornersHeuristic(state, problem):
     """
     corners = list(problem.corners) # These are the corner coordinates
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
+    actual = state[0]
     "*** YOUR CODE HERE ***"
     distance = 99999
-    for corner in corners :
-        manhatan = abs(corner[0] - state[0]) + abs(corner[1] - state[1])
-        if  manhatan < distance :
+    for corner in corners:
+        manhatan = util.manhattanDistance(actual,corner)
+        if manhatan < distance:
             distance = manhatan
     return distance
 
