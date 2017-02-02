@@ -288,9 +288,6 @@ class CornersProblem(search.SearchProblem):
         # Please add any code here which you would like to use
         # in initializing the problem
         "*** YOUR CODE HERE ***"
-        # self.visited = set()
-        self.top = top
-        self.right = right
 
     def getStartState(self):
         """
@@ -298,8 +295,7 @@ class CornersProblem(search.SearchProblem):
         space)
         """
         "*** YOUR CODE HERE ***"
-        return (self.startingPosition, set()) #change
-        # return (self.startingPosition, set(self.visited))
+        return (self.startingPosition, set())
         util.raiseNotDefined()
 
     def isGoalState(self, state):
@@ -307,8 +303,8 @@ class CornersProblem(search.SearchProblem):
         Returns whether this search state is a goal state of the problem.
         """
         "*** YOUR CODE HERE ***"
-        if len(state[1]) == len(self.corners): #change
-        # if len(self.visited) == len(self.corners):
+        #quan tots els corners estiguin visitats retorna true
+        if len(state[1]) == len(self.corners): 
                 return True
         return False
         util.raiseNotDefined()
@@ -338,12 +334,10 @@ class CornersProblem(search.SearchProblem):
             nextx, nexty = int(x + dx), int(y + dy)
             hitsWall = self.walls[nextx][nexty]
             if not hitsWall :
-                visited = set(state[1]) #canvi
+                visited = set(state[1])
                 if (nextx, nexty) in self.corners:
-                    visited.add((nextx, nexty)) #canvi
-                    # self.visited.add((nextx, nexty))
-                nextState = ((nextx, nexty), visited) #canvi
-                #nextState = ((nextx, nexty), set(self.visited))
+                    visited.add((nextx, nexty)) 
+                nextState = ((nextx, nexty), visited) #afeigeixo al set de visitats
                 successors.append( ( nextState , action , 1 ) )
         self._expanded += 1 # DO NOT CHANGE
         return successors
@@ -395,6 +389,7 @@ def cornersHeuristic(state, problem):
     for state in state[1]:
         corners.remove(state)
 
+    #calculo la distancia amb el corner mes proxim i recorsivament amb els corners mes propers
     lencor = len(corners)
 
     for i in range(lencor):
@@ -405,6 +400,7 @@ def cornersHeuristic(state, problem):
     return dist
 
 def calcDist(actual, corners):
+    ''' Calcula el node mes proxim i la distancia fins a ell '''
     distance = 999999
     for corner in corners:
         manhatan = util.manhattanDistance(actual,corner)
@@ -506,6 +502,8 @@ def foodHeuristic(state, problem):
     problem.heuristicInfo['wallCount']
     """
     "*** YOUR CODE HERE ***"
+    '''Calculo la distancia mes optima entre goals i li sumo la distancia
+    entre el primer goal de el recurregut minim que em trobat i la posicio de sortida'''
     position, foodGrid = state
     dist, foods = 0 , foodGrid.asList()
     fds = list(foods)
@@ -560,7 +558,7 @@ class ClosestDotSearchAgent(SearchAgent):
 
         "*** YOUR CODE HERE ***"
         
-        return search.astar(problem)
+        return search.astar(problem) #utilitzem el A* per solucionar el problema
 
         util.raiseNotDefined()
 
@@ -597,6 +595,7 @@ class AnyFoodSearchProblem(PositionSearchProblem):
         """
         x,y = state
         "*** YOUR CODE HERE ***"
+        #quin es el goal mes proxim i si estem a sobre del goal retornem true
         distance, actual = calcDist(state, self.food.asList())
         if state == actual:
             return True

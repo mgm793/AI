@@ -88,35 +88,36 @@ def depthFirstSearch(problem): #it works (3/3)
     """
     "*** YOUR CODE HERE ***"
     stack = util.Stack()
-    start = (problem.getStartState(), None, None) 
-    stack.push(start)
-    closeList = set()
-    output = []
+    start = (problem.getStartState(), None, None) #estat inicial
+    stack.push(start) #insertem el startNode a la pila
+    closeList = set() #nodes visitats
+    output = [] #la llista daccions que retornem
 
-    while not stack.isEmpty() :
+    while not stack.isEmpty() : 
         actualNode = stack.pop()
-        if actualNode[0] in closeList :
+        if actualNode[0] in closeList :#mira si el node ja esta visitat
             continue
         else :
-            if problem.isGoalState(actualNode[0]) :
-                while actualNode != start :
+            if problem.isGoalState(actualNode[0]) : #mirem si el node es el mateix que el de estat final
+                while actualNode != start : #fem el bucle per aconseguir el BACKTRACKING
                     output.append(actualNode[1])
                     actualNode = actualNode[3]
-                return output[::-1]
+                return output[::-1] #girem el ouput
             else :
-                childs = problem.getSuccessors(actualNode[0])
+                childs = problem.getSuccessors(actualNode[0]) #agafem els fills
                 for child in childs :
                     child = child + (actualNode, )
-                    stack.push(child)
+                    stack.push(child) #els afegim a la pila
         closeList.add(actualNode[0]) 
 
     util.raiseNotDefined()
 
 def breadthFirstSearch(problem): #it works (3/3)
     """Search the shallowest nodes in the search tree first."""
-    "*** YOUR CODE HERE ***"
+    "*** YOUR CODE HERE ***" 
+    #l'unic que diferencia el BFS del DFS es que un utilitza pila i l'altre cua
     queue = util.Queue()
-    start = (problem.getStartState(), None, None)
+    start = (problem.getStartState(), None, None) 
     queue.push(start)
     closeList = []
     output = []
@@ -130,8 +131,6 @@ def breadthFirstSearch(problem): #it works (3/3)
                 while actualNode != start :
                     output.append(actualNode[1])
                     actualNode = actualNode[3]
-                    
-                    #print actualNode ,'\n'
 
                 return output[::-1]
             else :
@@ -166,8 +165,8 @@ def uniformCostSearch(problem): #it works (3/3)
                 childs = problem.getSuccessors(actualNode[0])
                 for child in childs :
                     weight = child[2] + actualNode[4]
-                    child = child + (actualNode, weight, )
-                    f =  weight
+                    child = child + (actualNode, weight, ) 
+                    f =  weight #calculem el pes
                     queue.push(child , f)
         closeList.add(actualNode[0])
 
@@ -204,7 +203,7 @@ def aStarSearch(problem, heuristic=nullHeuristic): #it works (3/3)
                 for child in childs :
                     weight = child[2] + actualNode[4]
                     child = child + (actualNode, weight, )
-                    f = heuristic(child[0], problem) + weight
+                    f = heuristic(child[0], problem) + weight #calculem la funcio heuristica
                     queue.push(child , f)
         closeList.append(actualNode[0])
     util.raiseNotDefined()
