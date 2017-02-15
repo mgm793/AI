@@ -48,7 +48,6 @@ class ReflexAgent(Agent):
         chosenIndex = random.choice(bestIndices) # Pick randomly among the best
 
         "Add more of your code here if you want to"
-
         return legalMoves[chosenIndex]
 
     def evaluationFunction(self, currentGameState, action):
@@ -74,7 +73,31 @@ class ReflexAgent(Agent):
         newScaredTimes = [ghostState.scaredTimer for ghostState in newGhostStates]
 
         "*** YOUR CODE HERE ***"
-        return successorGameState.getScore()
+        x,y = newPos
+        food = minDistFood(newPos, newFood.asList())
+        ghost = minDistGhost( newPos,newGhostStates )
+        if len(newFood.asList()) == 0: return 9999
+        if newScaredTimes: successorGameState.getScore() - (food * 0.7)
+        return successorGameState.getScore() - (food * 0.7) + (ghost * 0.35)
+
+
+def minDistFood(pos, agents):
+  minim = float("inf")
+  for agent in agents:
+    dist = util.manhattanDistance(pos,agent)
+    if minim > dist:
+      minim = dist
+  return minim
+
+def minDistGhost(pos, agents):
+  minim = float("inf")
+  for agent in agents:
+    dist = util.manhattanDistance(pos,agent.getPosition())
+    if minim > dist:
+      minim = dist
+      ghost = agent
+  return minim
+
 
 def scoreEvaluationFunction(currentGameState):
     """
@@ -129,7 +152,40 @@ class MinimaxAgent(MultiAgentSearchAgent):
             Returns the total number of agents in the game
         """
         "*** YOUR CODE HERE ***"
+        lastChild = gameState.getNumAgents() - 1
+        return self.minimax(gameState,self.index,self.depth,lastChild)
         util.raiseNotDefined()
+
+    def minimax(self,state,index, depth, lastChild):
+        actions = state.getLegalActions(index)
+        if depth == 0 or actions == []:
+            return self.evaluationFunction(state)
+        if index == 0:
+            m = [- float("inf"), None]
+            for action in actions:
+                successor = state.generateSuccessor(index,action)
+                suc = self.minimax(successor,1,depth,lastChild)
+                if m[0] < suc:
+                    m[0] = suc
+                    m[1] = action
+            return m[1]
+        if index == lastChild:
+            m = float("inf")
+            for action in actions:
+              successor = state.generateSuccessor(index,action)
+              suc = self.minimax(successor,0,depth-1,lastChild)
+              if m > suc:
+                m = suc
+            return m
+        else:
+            m = float("inf")
+            for action in actions:
+              successor = state.generateSuccessor(index,action)
+              suc = self.minimax(successor,index+1,depth,lastChild)
+              if m > suc:
+                m = suc 
+            return m
+
 
 class AlphaBetaAgent(MultiAgentSearchAgent):
     """
