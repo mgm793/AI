@@ -152,36 +152,44 @@ class MinimaxAgent(MultiAgentSearchAgent):
             Returns the total number of agents in the game
         """
         "*** YOUR CODE HERE ***"
-        lastChild = gameState.getNumAgents() - 1
-        return self.minimax(gameState,self.index,self.depth,lastChild)
+        lastAgent = gameState.getNumAgents() - 1
+        actions = gameState.getLegalActions(0)
+        m = - float('inf')
+        bestAction = None
+        for action in actions:
+          succ =  gameState.generateSuccessor(0, action)
+          v = self.minimax(succ,self.index+1,self.depth,lastAgent)
+          if m < v:
+            bestAction = action
+            m = v
+        return bestAction
         util.raiseNotDefined()
 
-    def minimax(self,state,index, depth, lastChild):
+    def minimax(self,state,index, depth, lastAgent):
         actions = state.getLegalActions(index)
         if depth == 0 or actions == []:
             return self.evaluationFunction(state)
         if index == 0:
-            m = [- float("inf"), None]
+            m = - float('inf')
             for action in actions:
                 successor = state.generateSuccessor(index,action)
-                suc = self.minimax(successor,1,depth,lastChild)
-                if m[0] < suc:
-                    m[0] = suc
-                    m[1] = action
-            return m[1]
-        if index == lastChild:
-            m = float("inf")
+                suc = self.minimax(successor,1,depth,lastAgent)
+                if m < suc:
+                    m = suc
+            return m
+        elif index == lastAgent:
+            m = float('inf')
             for action in actions:
               successor = state.generateSuccessor(index,action)
-              suc = self.minimax(successor,0,depth-1,lastChild)
+              suc = self.minimax(successor,0,depth-1,lastAgent)
               if m > suc:
                 m = suc
             return m
         else:
-            m = float("inf")
+            m = float('inf')
             for action in actions:
               successor = state.generateSuccessor(index,action)
-              suc = self.minimax(successor,index+1,depth,lastChild)
+              suc = self.minimax(successor,index+1,depth,lastAgent)
               if m > suc:
                 m = suc 
             return m
