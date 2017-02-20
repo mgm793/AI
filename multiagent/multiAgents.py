@@ -156,6 +156,7 @@ class MinimaxAgent(MultiAgentSearchAgent):
         actions = gameState.getLegalActions(0)
         m = - float('inf')
         bestAction = None
+        # PRIMERA ITERACIO DEL PACMAN
         for action in actions:
           succ =  gameState.generateSuccessor(0, action)
           v = self.minimax(succ,self.index+1,self.depth,lastAgent)
@@ -167,32 +168,30 @@ class MinimaxAgent(MultiAgentSearchAgent):
 
     def minimax(self,state,index, depth, lastAgent):
         actions = state.getLegalActions(index)
+        # RETORNEM EL VALOR DE LA FULLA
         if depth == 0 or actions == []:
             return self.evaluationFunction(state)
+        # MAX
         if index == 0:
-            m = - float('inf')
+            suc = - float('inf')
             for action in actions:
                 successor = state.generateSuccessor(index,action)
-                suc = self.minimax(successor,1,depth,lastAgent)
-                if m < suc:
-                    m = suc
-            return m
+                suc = max(suc,self.minimax(successor,1,depth,lastAgent))
+            return suc
+        # MIN PER ELS LAST AGENTS
         elif index == lastAgent:
-            m = float('inf')
+            suc = float('inf')
             for action in actions:
               successor = state.generateSuccessor(index,action)
-              suc = self.minimax(successor,0,depth-1,lastAgent)
-              if m > suc:
-                m = suc
-            return m
+              suc = min(suc,self.minimax(successor,0,depth-1,lastAgent))
+            return suc
+        # MIN PER ELS QUE NO SON LAST AGENTS
         else:
-            m = float('inf')
+            suc = float('inf')
             for action in actions:
               successor = state.generateSuccessor(index,action)
-              suc = self.minimax(successor,index+1,depth,lastAgent)
-              if m > suc:
-                m = suc 
-            return m
+              suc = min(suc,self.minimax(successor,index+1,depth,lastAgent))
+            return suc
 
 
 class AlphaBetaAgent(MultiAgentSearchAgent):
@@ -205,7 +204,61 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
           Returns the minimax action using self.depth and self.evaluationFunction
         """
         "*** YOUR CODE HERE ***"
+        lastAgent = gameState.getNumAgents() - 1
+        actions = gameState.getLegalActions(0)
+        m = - float('inf')
+        a = - float('inf')
+        b = float('inf')
+        bestAction = None
+        # PRIMERA ITERACIO DEL PACMAN
+        for action in actions:
+          succ =  gameState.generateSuccessor(0, action)
+          v,a1,b1 = self.minimax(succ,self.index+1,self.depth,lastAgent,a,b)
+          a = max(v,a1)
+          if m < v:
+            bestAction = action
+            m = v
+        return bestAction
         util.raiseNotDefined()
+
+    def minimax(self,state,index, depth, lastAgent,a,b):
+        actions = state.getLegalActions(index)
+        # RETORNEM EL VALOR DE LA FULLA
+        if depth == 0 or actions == []:
+            return self.evaluationFunction(state),a,b
+        # MAX
+        if index == 0:
+            suc = - float('inf')
+            for action in actions:
+              successor = state.generateSuccessor(index,action)
+              v,a1,b1 = self.minimax(successor,1,depth,lastAgent,a,b)
+              suc = max(v,suc)
+              if b1 < suc:
+                break
+              a = max(suc,a1)
+            return suc , a , b
+        # MIN PER ELS LAST AGENTS
+        elif index == lastAgent:
+            suc = float('inf')
+            for action in actions:
+              successor = state.generateSuccessor(index,action)
+              v,a1,b1 = self.minimax(successor,0,depth-1,lastAgent,a,b)
+              suc = min(suc,v)
+              if suc < a1:
+                break
+              b = min(b1,suc)
+            return suc , a , b
+        # MIN PER ELS QUE NO SON LAST AGENTS
+        else:
+            suc = float('inf')
+            for action in actions:
+              successor = state.generateSuccessor(index,action)
+              v,a1,b1 = self.minimax(successor,index+1,depth,lastAgent,a,b)
+              suc = min(suc,v)
+              if suc < a1:
+                break
+              b = min(b1,suc)
+            return suc , a , b
 
 class ExpectimaxAgent(MultiAgentSearchAgent):
     """
