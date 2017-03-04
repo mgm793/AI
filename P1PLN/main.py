@@ -5,7 +5,6 @@ def init():
 	solFile = raw_input("Solution file name: ")
 	accuracy = Evaluate(file,solFile)
 
-
 class SetLexic():
 
 	def __init__(self):
