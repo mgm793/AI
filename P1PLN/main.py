@@ -18,7 +18,6 @@ class SetLexic():
 	def getDicc(self):
 		return self.dicc
 
-
 	def setDicc(self):
 		with open(self.file) as f:
 			for line in f:
@@ -74,7 +73,6 @@ class Evaluate():
 		self.solFile = open(gold,"r")
 		self.testLines = None
 		self.solLines = None
-		self.read()
 		print "Accuracy: %.2f" % self.calcAccuracy() + "%"
  
 	def read(self):
