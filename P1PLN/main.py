@@ -82,7 +82,7 @@ class Evaluate():
 		self.testLines = []
 		self.solLines = []
 		self.read()
-		print "%.2f" % self.calcAccuracy()
+		print "Accuracy: %.2f" % self.calcAccuracy() + "%"
  
 	def read(self):
 		self.testLines = self.testFile.readlines()
