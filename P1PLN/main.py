@@ -73,6 +73,7 @@ class Evaluate():
 		self.solFile = open(gold,"r")
 		self.testLines = None
 		self.solLines = None
+		self.read()
 		print "Accuracy: %.2f" % self.calcAccuracy() + "%"
  
 	def read(self):
@@ -90,7 +91,7 @@ class Evaluate():
 			testTag = testTag.replace('\n','')
 			solTag 	=  solTag.replace('\r\n','')
 
-			if testWord.lower() == solWord.lower() and testTag == solTag:
+			if testWord == solWord.lower() and testTag == solTag:
 				succesNumber += 1
 		
 		return (float(succesNumber)/ocNumber) * 100
