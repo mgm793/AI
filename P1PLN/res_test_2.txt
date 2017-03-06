@@ -57,7 +57,7 @@ juego	NC
 apoyados	V
 por	Prep
 el	Det
-imcombustible	NC
+imcombustible	NP
 juan_antonio_san_epifanio	NP
 ,	Punt
 fueron	V
@@ -158,7 +158,7 @@ una	Det
 canasta	NC
 de	Prep
 epi	NP
-equilibraron	Adj
+equilibraron	V
 los	Det
 once	Det
 puntos	NC
@@ -168,7 +168,7 @@ de	Prep
 la	Det
 ida	NC
 (	Fin
-23-12	NP
+23-12	Num
 ,	Punt
 min.	Abr
 9	Num
@@ -178,7 +178,7 @@ aito_garcía_reneses	NP
 ,	Punt
 tras	Prep
 un	Det
-24-16	NC
+24-16	Num
 ,	Punt
 reforzó	V
 el	Det
@@ -212,7 +212,7 @@ en	Prep
 el	Det
 marcador	NC
 (	Fin
-36-22	NP
+36-22	Num
 ,	Punt
 min.	Abr
 17	Num
@@ -254,7 +254,7 @@ de	Prep
 diez	Det
 puntos	NC
 (	Fin
-40-30	NP
+40-30	Num
 )	Fin
 .	Fin
 el	Det
@@ -341,7 +341,7 @@ ventaja	NC
 local	Adj
 hasta_entonces	Adv
 (	Fin
-49-32	NP
+49-32	Num
 m	NC
 .23	Num
 )	Fin
@@ -352,7 +352,7 @@ visitante	Adj
 relevó	V
 al	Prep
 base	NC
-germand_scarone_por_winston_garland	Adj
+germand_scarone_por_winston_garland	NP
 y	Conj
 a	Prep
 maurizio_ragazzi_por_pellacani	NP
@@ -383,14 +383,14 @@ acortaron	V
 las	Det
 distancias	NC
 (	Fin
-61-53	NP
+61-53	Num
 ,	Punt
 m	NC
 .29	Num
 )	Fin
 .	Fin
 con	Prep
-65-55	NP
+65-55	Num
 (	Fin
 m	NC
 .30	Num
@@ -439,7 +439,7 @@ en	Prep
 el	Det
 marcador	NC
 (	Fin
-74-55	NP
+74-55	Num
 m	NC
 .34	Num
 )	Fin
@@ -477,7 +477,7 @@ diferencia	NC
 de	Prep
 puntos	NC
 (	Fin
-75-67	NP
+75-67	Num
 ,	Punt
 min.	Abr
 38	Num
@@ -815,7 +815,7 @@ país	NC
 que	Pron
 totalizaron	V
 los	Det
-38.783	NC
+38.783	Num
 millones	NC
 de	Prep
 dólares	NC
@@ -827,7 +827,7 @@ a	Prep
 latinoamérica	NP
 sumaron	V
 los	Det
-9.144	NC
+9.144	Num
 millones	NC
 de	Prep
 dólares	NC
@@ -836,7 +836,7 @@ valor	NC
 que	Pron
 representa	V
 el	Det
-23,58	NC
+23,58	Num
 por	Prep
 ciento	NC
 de	Prep
@@ -871,7 +871,7 @@ paraguay	NP
 ,	Punt
 con	Prep
 el	Det
-76,8	NC
+76,8	Num
 por	Prep
 ciento	NC
 ,	Punt
@@ -880,7 +880,7 @@ uruguay	NP
 ,	Punt
 con	Prep
 el	Det
-50,7	NC
+50,7	Num
 por	Prep
 ciento	NC
 .	Fin
@@ -967,7 +967,7 @@ crecieron	V
 en	Prep
 1993	Num
 el	Det
-13,6	NC
+13,6	Num
 por	Prep
 ciento	NC
 ,	Punt
@@ -1020,7 +1020,7 @@ el	Det
 saldo	NC
 histórico	Adj
 de	Prep
-25.711	NP
+25.711	Num
 millones	NC
 de	Prep
 dólares	NC
@@ -1047,7 +1047,7 @@ se	Pron
 situó	V
 en	Prep
 los	Det
-13.072	NC
+13.072	Num
 millones	NC
 de	Prep
 dólares	NC
@@ -1168,7 +1168,7 @@ esta	Det
 noche	NC
 en	Prep
 el	Det
-banco_nat_west_españa_de_pamplona	NC
+banco_nat_west_españa_de_pamplona	NP
 ,	Punt
 sin	Prep
 causar	V
@@ -1185,7 +1185,7 @@ efe	NP
 fuentes	NC
 de	Prep
 la	Det
-policía_muncipal	NC
+policía_muncipal	NP
 .	Fin
 el	Det
 artefacto	NC
@@ -1218,10 +1218,10 @@ de	Prep
 la	Det
 calle	NC
 monasterio	NC
-santa_eulalia	Adj
+santa_eulalia	NP
 con	Prep
 la	Det
-avenida_de_bayona	NC
+avenida_de_bayona	NP
 ,	Punt
 en	Prep
 el	Det
@@ -1529,7 +1529,7 @@ dos	Det
 ,	Punt
 que	Pron
 se	Pron
-bañaban	NP
+bañaban	V
 en	Prep
 un	Det
 riachuelo	NP
@@ -1618,7 +1618,7 @@ el	Det
 comisario	NC
 de	Prep
 la	Det
-policía_civil_de_pernambuco	NC
+policía_civil_de_pernambuco	NP
 ,	Punt
 josedite_ferreira	NP
 ,	Punt
@@ -1709,7 +1709,7 @@ brasil	NP
 ,	Punt
 cifran	V
 en	Prep
-2.015	NP
+2.015	Num
 el	Det
 número	NC
 de	Prep
@@ -1786,7 +1786,7 @@ carga	NC
 ,	Punt
 el	Det
 "	Punt
-an-70	NP
+an-70	Num
 "	Punt
 ,	Punt
 con	Prep
@@ -1799,7 +1799,7 @@ competencia	NC
 al	Prep
 europeo	Adj
 "	Punt
-c-160	NP
+c-160	Num
 transol	NP
 "	Punt
 y	Conj
@@ -1827,7 +1827,7 @@ piotr_balabuyev	NP
 ,	Punt
 el	Det
 "	Punt
-an-70	NP
+an-70	Num
 "	Punt
 consume	V
 menos	Adv
@@ -1862,7 +1862,7 @@ kilómetros_por_hora	NC
 balabuyev	NP
 sostiene	V
 que	Pron
-antonov	NP
+antonov	V
 ya	Adv
 ha	VAux
 logrado	V
@@ -1920,7 +1920,7 @@ dólares	NC
 mientras_que	Conj
 el	Det
 "	Punt
-an-70	NP
+an-70	Num
 "	Punt
 tendrá	V
 un	Det
@@ -1934,7 +1934,7 @@ cree	V
 que	Pron
 los	Det
 "	Punt
-an-70	NP
+an-70	Num
 "	Punt
 ,	Punt
 fabricados	Adj
@@ -1968,7 +1968,7 @@ senadores	NC
 mexicanos	Adj
 de	Prep
 la	Det
-comisión_de_comercio	NC
+comisión_de_comercio	NP
 y	Conj
 fomento_industrial	NP
 viajará	V
@@ -2007,7 +2007,7 @@ los	Det
 funcionarios	NC
 de	Prep
 la	Det
-secretaría_de_programación_económica	NC
+secretaría_de_programación_económica	NP
 y	Conj
 de	Prep
 obras	NC
@@ -2047,7 +2047,7 @@ la	Det
 perspectiva	NC
 de	Prep
 la	Det
-incorporción	NC
+incorporción	NP
 de	Prep
 ambos	Det
 países	NC
@@ -2146,7 +2146,7 @@ posibilidad	NC
 en	Prep
 su	Det
 artículo	NC
-2205	Adj
+2205	Num
 ,	Punt
 de	Prep
 que	Pron
@@ -2202,7 +2202,7 @@ país	NC
 "	Punt
 .	Fin
 el	Det
-ministerio_de_defensa_de_chile	NC
+ministerio_de_defensa_de_chile	NP
 devolvió	V
 hoy	Adv
 ,	Punt
@@ -2286,7 +2286,7 @@ nemesio_antúnez	NP
 ,	Punt
 además_de	Prep
 algunos	Det
-guacos	NC
+guacos	NP
 (	Fin
 cerámica	Adj
 )	Fin
@@ -2352,7 +2352,7 @@ fue	V
 bombardeada	V
 por	Prep
 aviones	NC
-hawker_hunter_de_la_fuerza_aérea	Adj
+hawker_hunter_de_la_fuerza_aérea	NP
 .	Fin
 allende	NP
 falleció	V
@@ -2550,7 +2550,7 @@ riesgo	NC
 extremo	NC
 de	Prep
 malformación	NP
-congénita	NP
+congénita	V
 .	Fin
 de	Prep
 las	Det
@@ -2570,7 +2570,7 @@ atrocidad	NC
 recurrir	V
 a	Prep
 la	Det
-ingenería	NC
+ingenería	NP
 genética	Adj
 para	Prep
 garantizar	V
@@ -2681,7 +2681,7 @@ tiene	V
 en	Prep
 la	Det
 calle	NC
-juan_de_garay	Adj
+juan_de_garay	NP
 ,	Punt
 35	Num
 de	Prep
@@ -2694,7 +2694,7 @@ informaron	V
 fuentes	NC
 de	Prep
 la	Det
-policia_municipal_de_bilbao	NC
+policia_municipal_de_bilbao	NP
 ,	Punt
 la	Det
 explosión	NC
@@ -2702,7 +2702,7 @@ se	Pron
 produjo	V
 a	Prep
 las	Det
-11,45	NC
+11,45	Num
 horas	NC
 de	Prep
 esta	Det
@@ -3180,7 +3180,7 @@ gobierno	NP
 .	Fin
 el	Det
 cardenal	NC
-aponte_martínez	Adj
+aponte_martínez	NP
 opina	NC
 que	Pron
 promocionar	V
@@ -3201,7 +3201,7 @@ equivale	V
 a	Prep
 promover	V
 la	Det
-promiscuidad	NC
+promiscuidad	NP
 sexual	Adj
 .	Fin
 "	Punt
@@ -3211,7 +3211,7 @@ verdad	NC
 que	Pron
 promover	V
 la	Det
-promiscuidad	NC
+promiscuidad	NP
 sexual	Adj
 es	V
 un	Det
@@ -3316,7 +3316,7 @@ durante	Prep
 su	Det
 mensaje	NC
 rosselló	NP
-anunción	Adj
+anunción	V
 otras	Det
 iniciativas	NC
 en	Prep
@@ -3451,7 +3451,7 @@ como	Conj
 nosotros	Pron
 ,	Punt
 los	Det
-salubristas	NC
+salubristas	NP
 ,	Punt
 pedimos	V
 en	Prep
@@ -3484,7 +3484,7 @@ presos	Adj
 colombianos	Adj
 en	Prep
 el	Det
-penal_garcía_moreno_de_quito	NC
+penal_garcía_moreno_de_quito	NP
 ,	Punt
 entró	V
 hoy	Adv
@@ -3594,7 +3594,7 @@ que	Pron
 los	Det
 presos	Adj
 que	Pron
-ayunan	NP
+ayunan	V
 están	V
 débiles	Adj
 ,	Punt
@@ -3854,7 +3854,7 @@ conferencia_de_prensa	NC
 ofrecida	V
 en	Prep
 el	Det
-club_de_prensa_internacional	NC
+club_de_prensa_internacional	NP
 ,	Punt
 reina	NC
 ,	Punt
@@ -3885,7 +3885,7 @@ juego	NC
 desde	Prep
 ahora	Adv
 su	Det
-prestigo	NC
+prestigo	NP
 y	Conj
 la	Det
 credibilidad	NC
@@ -4234,7 +4234,7 @@ la	Det
 situación	NC
 económica	Adj
 que	Pron
-hereda	NP
+hereda	V
 de	Prep
 la	Det
 anterior	Adj
@@ -4302,7 +4302,7 @@ calculado	Adj
 por	Prep
 el	Det
 la	Det
-administración_callejas	NC
+administración_callejas	NP
 en	Prep
 un	Det
 5,6	Num
@@ -4484,7 +4484,7 @@ maestro	Adj
 internacional	Adj
 de	Prep
 ajedrez	NC
-alexei_shirov	Adj
+alexei_shirov	NP
 ,	Punt
 de	Prep
 letonia	NP
@@ -4695,7 +4695,7 @@ elecciones	NC
 europeas	Adj
 .	Fin
 el	Det
-comisario_europeo	NC
+comisario_europeo	NP
 manifestó	V
 sobre	Prep
 la	Det

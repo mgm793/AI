@@ -1,5 +1,4 @@
 def init():
-
 	lexic = SetLexic()
 	file = raw_input("Name of file to test: ") 
 	test = Test(lexic, file)
@@ -64,16 +63,30 @@ class Test():
 					text = word + "\t" + types[0][0] + "\n"
 					prev = types[0][0]
 				except KeyError, err:
-					if prev == None:
+					if any(map(lambda c:c.isdigit(),word)):
+						text = word + "\t" + "Num" + "\n"
+						prev = "Num"
+					elif "_" in word:
+						text = word + "\t" + "NP" + "\n"
+						prev = "NP"
+					elif prev == "Pron":
+						text = word + "\t" + "V" + "\n"
+						prev = "V"
+					elif prev == None:
 						text = word + "\t" + "Det" + "\n"
 						prev = "Det"
 					elif prev == "Det":
-						text = word + "\t" + "NC" + "\n"
-					elif prev == "NP" or prev == "NC":
+						text = word + "\t" + "NP" + "\n"
+						prev = "NP"
+					elif prev == "NP":
+						text = word + "\t" + "V" + "\n"
+						prev = "V"
+					elif prev == "NC":
 						text = word + "\t" + "Adj" + "\n"
+						prev = "Adj"
 					else:
 						text = word + "\t" + "NP" + "\n"
-
+						prev = "NP"
 				self.res.write(text)
 		f.close()
 		self.res.close()
@@ -103,10 +116,10 @@ class Evaluate():
 			testWord , testTag = self.testLines[test].split("\t")
 			testTag = testTag.replace('\n','')
 			solTag 	=  solTag.replace('\r\n','')
-
 			if testWord == solWord.lower() and testTag == solTag:
 				succesNumber += 1
-		
+			else:
+				print testWord, solWord, testTag, solTag
 		return (float(succesNumber)/ocNumber) * 100
 
 init()
