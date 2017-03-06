@@ -1,4 +1,5 @@
 def init():
+
 	lexic = SetLexic()
 	file = raw_input("Name of file to test: ") 
 	test = Test(lexic, file)
@@ -53,6 +54,7 @@ class Test():
 
 	def setRes(self):
 		with open(self.file) as f:
+			prev = None
 			for line in f:
 				line = line.decode("latin_1").encode("UTF-8")
 				word = line.replace("\r\n", "").lower()
@@ -60,8 +62,18 @@ class Test():
 					types = self.dicc[word]
 					types = sorted(types.items(), key=lambda t: t[1], reverse=True)
 					text = word + "\t" + types[0][0] + "\n"
+					prev = types[0][0]
 				except KeyError, err:
-					text = word + "\t" + "NC" + "\n"
+					if prev == None:
+						text = word + "\t" + "Det" + "\n"
+						prev = "Det"
+					elif prev == "Det":
+						text = word + "\t" + "NC" + "\n"
+					elif prev == "NP" or prev == "NC":
+						text = word + "\t" + "Adj" + "\n"
+					else:
+						text = word + "\t" + "NP" + "\n"
+
 				self.res.write(text)
 		f.close()
 		self.res.close()
@@ -87,6 +99,7 @@ class Evaluate():
 		succesNumber = 0
 		for test in range(len(self.testLines)):
 			solWord , solTag = self.solLines[test].split("\t")
+			solWord = solWord.decode("latin_1").encode("UTF-8")
 			testWord , testTag = self.testLines[test].split("\t")
 			testTag = testTag.replace('\n','')
 			solTag 	=  solTag.replace('\r\n','')
