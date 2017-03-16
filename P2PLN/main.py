@@ -27,8 +27,7 @@ class CreateCorpus():
 				self.counts = collections.Counter(words)
 			else:
 				self.counts += collections.Counter(words)
-		self.counts = self.counts.most_common(int(n))
-		self.counts = [word[0] for word in self.counts]
+		self.counts = [str(word[0]) for word in self.counts.most_common(int(n))]
 			
 
 class CalcVect():
@@ -44,7 +43,6 @@ class CalcVect():
 			words = nltk.word_tokenize(text)
 			words = [word.lower() for word in words if word.isalpha() and word in vect]
 			counts = collections.Counter(words)
-			print counts
 
 
 init()
