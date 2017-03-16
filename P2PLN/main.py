@@ -8,7 +8,7 @@ path = './dataset/'
 def init():
 	n = raw_input("Number of most common words: ")
 	corpus = CreateCorpus(n)
-	calcVect = CalcVect(corpus.counts)
+	calcVect = CalcVect(corpus.counts,n)
 
 class CreateCorpus():
 
@@ -32,13 +32,13 @@ class CreateCorpus():
 
 class CalcVect():
 
-	def __init__(self, vect):
+	def __init__(self, vect,n):
 		self.vector = None
-		self.readAndMake(vect)
+		self.readAndMake(vect,n)
 
 		
-	def readAndMake(self,vect):
-		output = open("output.arff","w")
+	def readAndMake(self,vect,n):
+		output = open("output_" + n + ".arff","w")
 		output.write("@relation training\n\n")
 		for v in sorted(vect):
 			output.write("@attribute " + v + " numeric\n")
