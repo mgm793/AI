@@ -3,7 +3,7 @@ import collections
 import os
 import codecs
 
-class CreateCorpus():
+class Most_common():
 
 	def __init__(self, n,path):
 		self.counts = None
