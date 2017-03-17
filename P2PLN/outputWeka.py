@@ -11,7 +11,7 @@ class OutputWeka():
 
 		
 	def readAndMake(self,vect,n,path):
-		output = open("output_" + n + ".arff","w")
+		output = open("./outputs/output_" + n + ".arff","w")
 		output.write("@relation training\n\n")
 		for v in sorted(vect):
 			output.write("@attribute '" + v + "' numeric\n")
