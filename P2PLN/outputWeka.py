@@ -24,7 +24,8 @@ class OutputWeka():
 			text = f.read()
 			words = nltk.word_tokenize(text)
 			lenW = len(words)
-			words = [str(word.lower()) for word in words if word == ";" or word.isalpha() and word in vect]
+			# lower
+			words = [str(word) for word in words if word == ";" or word.isalpha() and word in vect]
 			counts += collections.Counter(words).most_common()
 			counts += [(word , 0) for word in vect if word not in words]
 			counts.sort(key=lambda x: x[0])

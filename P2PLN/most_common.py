@@ -14,7 +14,8 @@ class Most_common():
 			f = codecs.open(path + filename,"r",encoding="utf-8")
 			text = f.read()
 			words = nltk.word_tokenize(text)
-			words = [word.lower() for word in words if word.isalpha()]
+			# lower
+			words = [word for word in words if word.isalpha()]
 			if not self.counts:
 				self.counts = collections.Counter(words)
 			else:
