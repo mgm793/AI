@@ -7,6 +7,8 @@ def init():
 
 class SetLexic():
 
+	''' CLASSE QUE CREA EL FITXER LEXIC '''
+
 	def __init__(self):
 		self.file = "corpus.txt"
 		self.exit = open("lexic.txt","w")
@@ -43,6 +45,10 @@ class SetLexic():
 		self.exit.close()
 
 class Test():
+
+	''' CLASSE QUE ASSIGNA QUIN TIPUS DE PARAULA SON LES
+		PERAULES DEL FITXER test_n.txt I HO GUARDA EN EL 
+		FITXER res_test_n.txt '''
 
 	def __init__(self,lexic,file):
 		self.dicc = lexic.getDicc()
@@ -92,6 +98,9 @@ class Test():
 		self.res.close()
 
 class Evaluate():
+
+	''' CALCULEM LA "ACCUARACY" DELS NOSTRES RESULTATS
+		AMB EL RESULTAT OPTIM REAL '''
  
 	def __init__(self, test,gold):
 		self.testFile = open("res_" + test,"r")
@@ -118,8 +127,6 @@ class Evaluate():
 			solTag 	=  solTag.replace('\r\n','')
 			if testWord == solWord.lower() and testTag == solTag:
 				succesNumber += 1
-			else:
-				print testWord, solWord, testTag, solTag
 		return (float(succesNumber)/ocNumber) * 100
 
 init()
